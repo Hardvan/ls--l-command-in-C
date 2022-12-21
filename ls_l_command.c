@@ -25,7 +25,7 @@ int main()
     {
         stat(de->d_name, &buf); // Get the file information
 
-        // File Type
+        // 1) File Type
         if (S_ISDIR(buf.st_mode))
             printf("d");
         else if (S_ISREG(buf.st_mode))
@@ -41,7 +41,7 @@ int main()
         else if (S_ISSOCK(buf.st_mode))
             printf("s");
 
-        // File Permissions
+        // 2) File Permissions
         // P: Full Permissions, AP: Actual Permissions
         for (i = 0, j = (1 << 8); i < 9; i++, j >>= 1)
         {
@@ -49,26 +49,26 @@ int main()
         }
         printf("%s", AP);
 
-        // No. of Hard Links
+        // 3) No. of Hard Links
         printf(" %5d", buf.st_nlink);
 
-        // User Name
+        // 4) User Name
         p = getpwuid(buf.st_uid);
         printf(" %.8s", p->pw_name);
 
-        // Group Name
+        // 5) Group Name
         g = getgrgid(buf.st_gid);
         printf(" %-8.8s", g->gr_name);
 
-        // File Size
+        // 6) File Size
         printf(" %8d", buf.st_size);
 
-        // Date and Time of Modification
+        // 7) Date and Time of Modification
         t = localtime(&buf.st_mtime);
         strftime(time, sizeof(time), "%b %d %H:%M", t);
         printf(" %s", time);
 
-        // File Name
+        // 8) File Name
         printf("%s\n", de->d_name);
     }
 
