@@ -7,20 +7,21 @@
 
 int main()
 {
-    DIR *d;
-    struct dirent *de;
-    struct stat buf;
-    int i, j;
-    char P[10] = "rwxrwxrwx", AP[10] = " ";
-    struct passwd *p;
-    struct group *g;
-    struct tm *t;
-    char time[26];
-    d = opendir(".");
-    readdir(d);
-    readdir(d);
+    DIR *d;                                 // Directory
+    struct dirent *de;                      // Directory Entry
+    struct stat buf;                        // Buffer
+    int i, j;                               // Loop Variables
+    char P[10] = "rwxrwxrwx", AP[10] = " "; // P: Full Permissions, AP: Actual Permissions
+    struct passwd *p;                       // Password
+    struct group *g;                        // Group
+    struct tm *t;                           // Time
+    char time[26];                          // Time for display
 
-    while ((de = readdir(d)) != NULL)
+    d = opendir("."); // Open current directory
+    readdir(d);       // Read the first entry
+    readdir(d);       // Read the second entry
+
+    while ((de = readdir(d)) != NULL) // Read the remaining entries
     {
         stat(de->d_name, &buf);
 
