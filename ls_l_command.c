@@ -23,7 +23,7 @@ int main()
 
     while ((de = readdir(d)) != NULL) // Read the remaining entries
     {
-        stat(de->d_name, &buf);
+        stat(de->d_name, &buf); // Get the file information
 
         // File Type
         if (S_ISDIR(buf.st_mode))
